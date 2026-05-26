@@ -3,6 +3,8 @@
 Event-driven data ingestion pipeline using AWS S3 and Lambda.
 
 ## Architecture
+New file uploaded to S3 → S3 trigger → Lambda processes data → Processed file saved back to S3
+
 ## Tech Stack
 - AWS S3 (data lake storage)
 - AWS Lambda (serverless processing)

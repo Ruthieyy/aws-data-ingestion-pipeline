@@ -2,16 +2,31 @@
     "Version": "2012-10-17",
     "Statement": [
         {
+            "Sid": "ReadRawObjects",
+            "Effect": "Allow",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::YOUR_INPUT_BUCKET/raw/*"
+        },
+        {
+            "Sid": "WriteProcessedObjects",
+            "Effect": "Allow",
+            "Action": "s3:PutObject",
+            "Resource": "arn:aws:s3:::YOUR_OUTPUT_BUCKET/processed/*"
+        },
+        {
+            "Sid": "CreateFunctionLogGroup",
+            "Effect": "Allow",
+            "Action": "logs:CreateLogGroup",
+            "Resource": "arn:aws:logs:YOUR_REGION:YOUR_ACCOUNT_ID:*"
+        },
+        {
+            "Sid": "WriteFunctionLogs",
             "Effect": "Allow",
             "Action": [
-                "s3:GetObject",
-                "s3:PutObject",
-                "s3:ListBucket"
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
             ],
-            "Resource": [
-                "arn:aws:s3:::yu-data-lake-test",
-                "arn:aws:s3:::yu-data-lake-test/*"
-            ]
+            "Resource": "arn:aws:logs:YOUR_REGION:YOUR_ACCOUNT_ID:log-group:/aws/lambda/YOUR_FUNCTION_NAME:*"
         }
     ]
 }
